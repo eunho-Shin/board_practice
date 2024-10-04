@@ -53,7 +53,7 @@ public class BoardService {
 //                MultipartFile boardFile = boardDTO.getBoardFiles(); // 1
                 String originalFileName = boardFile.getOriginalFilename();
                 String storedFileName = System.currentTimeMillis() + "_" + originalFileName;
-                String savePath = "D:/springboot_img/" + storedFileName;
+                String savePath = "E:/springboot_img/" + storedFileName;
                 boardFile.transferTo(new File(savePath));
 
                 BoardFileEntity boardFileEntity = BoardFileEntity.toBoardFileEntity(board, originalFileName, storedFileName);
