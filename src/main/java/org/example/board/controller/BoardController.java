@@ -2,8 +2,10 @@ package org.example.board.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.board.dto.BoardDTO;
+import org.example.board.dto.CommentDTO;
 import org.example.board.entity.BoardEntity;
 import org.example.board.service.BoardService;
+import org.example.board.service.CommentService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,6 +22,7 @@ import java.util.List;
 public class BoardController {
 
     private final BoardService boardService;
+    private final CommentService commentService;
 
     @GetMapping("/save")
     public String saveForm() {
@@ -51,6 +54,10 @@ public class BoardController {
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("board", boardDTO);
         model.addAttribute("page", pageable.getPageNumber());
+
+        /* 댓글 목록 가져오기 */
+        List<CommentDTO> commentDTOList = commentService.findAll(id);
+        model.addAttribute("commentList", commentDTOList);
 
         return "detail";
     }
